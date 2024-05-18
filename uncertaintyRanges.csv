@@ -1,0 +1,10 @@
+"","Plant.Functional.Types","ID","vcmax.default","vcmax.min","vcmax.max","kn.default","kn.min","kn.max"
+"1","Needleleaf evergreen tree","NdlEvgTr",42,30,78,0.5,0.34,0.56
+"2","Needleleaf deciduous tree","NdlDcdTr",47,38,53,0.5,0.34,0.56
+"3","Broadleaf evergreen tree","BdlEvgTr",35,25,51,0.5,0.47,0.71
+"4","Broadleaf cold deciduous tree","BdlDCoTr",57,23,58,0.5,0.47,0.71
+"5","Broadleaf dry deciduous tree","BdlDDrTr",40,23,58,0.5,0.47,0.71
+"6","Crop with C3 photosythesis","CropC3",55,33,88,0.4,0.4,0.79
+"7","Crop with C4 photosythesis","CropC4",40,43,61,0.48,0.45,0.79
+"8","Grass with C3 photosythesis","GrassC3",55,33,88,0.46,0.35,0.65
+"9","Grass with C4 photosythesis","GrassC4",15,15,61,0.44,0.35,0.65
