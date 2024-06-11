@@ -1,10 +1,12 @@
+.libPaths("/home/cseiler/AMBER/renv/library/R-4.3/x86_64-pc-linux-gnu")
+
 library(raster)
 rm(list=ls())
 
 # Number of grid cells to sample:
-nGridcells <- 60
-minFracArea <- 1.0
-my.seed <- 7 # 4
+nGridcells <- 200 # 60
+minFracArea <- 1
+my.seed <- 2 # 7
 
 
 # Get WWF Biomes

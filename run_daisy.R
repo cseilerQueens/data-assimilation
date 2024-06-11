@@ -266,7 +266,7 @@ result <- ga_daisy(
     upper = upper,
     popSize = 20,
     elitism = 4,
-    maxiter = 3,
+    maxiter = 50,
     run = 5,
     maxFitness = 1,
     suggestions = normParameterValues,

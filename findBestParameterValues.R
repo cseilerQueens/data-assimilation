@@ -38,12 +38,12 @@ kn <- c(0.50, 0.50, 0.40, 0.46, 0.50, 0.50, 0.48, 0.44, 0.50)
 default.list <- list(vmax, kn)
 
 # uncertainty ranges
-vcmax.min <- read.csv("vcmax.min.csv", header = TRUE)  * 10^(-6)
-vcmax.max <- read.csv("vcmax.max.csv", header = TRUE)  * 10^(-6)
+vmax.min <- read.csv("vmax.min.csv", header = TRUE)  * 10^(-6)
+vmax.max <- read.csv("vmax.max.csv", header = TRUE)  * 10^(-6)
 kn.min <- read.csv("kn.min.csv", header = TRUE)
 kn.max <- read.csv("kn.max.csv", header = TRUE)
-upperBound.list <- list(vcmax.max, kn.max)
-lowerBound.list <- list(vcmax.min, kn.min)
+upperBound.list <- list(vmax.max, kn.max)
+lowerBound.list <- list(vmax.min, kn.min)
 
 parameterName.list <- list("vmax", "kn")
 
@@ -198,7 +198,7 @@ df <- data.frame(object@summary)
 
 png("score_generation.png", width = 6, height = 5, units = "in", res = 300)
 par(mar = c(5,5,1,1))
-plot(df$median, type = "l", xlim = c(1,50), ylim = c(0.65, 0.67),
+plot(df$median, type = "l", xlim = c(1,50), ylim = c(0.65, 0.672),
 xlab = "Generation", ylab = "Score (-)")
 #points(df$median, pch = 16)
 lines(df$q1, type = "l", col = "grey")
@@ -208,8 +208,23 @@ lines(df$q3, type = "l", col = "grey")
 #lines(df$max, type = "l", lty = 2, col = "grey")
 
 # abline(h = 0.7191567, col = "blue")
+abline(h = 0.664981976460085, col = "blue") # Default 200 GC
 # legend("bottomright", col = c("blue", "grey", NA), lty = 1, lwd = 2, 
 # c("Score when using default vmax and kn values", "Interquartile range", "Population Size = 20"), bty = "n")
 
 dev.off()
+
+# Obtain solutions
+
+parameterNames <- list("vmax", "kn", "thrprcnt", "alpha_phtsyn", "lfespany", "grescoef", 
+                       "avertmas", "mxrtdpth", "sn", "XLEAF", "maxage", "ZOLNG", 
+                       "coldthrs", "alpha", "gamma_w", "beta2", "kappa", "minslai", 
+                       "coldlmt", "roothrsh", "abar", "vpd0", "albnir", "TCSAND", 
+                       "TCCLAY", "ZOLNS", "minlvfr", "omega")
+
+
+solution <- object@solution
+
+parameterValues <- intFun.unnormalize(normParameterValuesList[[i]], upperBoundList[[i]], lowerBoundList[[i]])
+
 

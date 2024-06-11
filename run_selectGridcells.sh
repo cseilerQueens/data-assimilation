@@ -1,3 +1,5 @@
+module load StdEnv/2023 gcc/12.3 udunits/2.2.28 hdf/4.2.16 gdal/3.7.2 r/4.3.1 nco/5.1.7
+
 
 rm GC_multipleGridCells.nc
 rm masked_data.nc
@@ -10,8 +12,8 @@ cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/t
 Rscript selectGridcells.R
 
 # module load openmpi/4.0.3
-module load cdo/1.9.8
-module load nco/5.0.6
+# module load cdo/1.9.8
+# module load nco/5.0.6
 # module load netcdf-fortran-mpi/4.5.2
 # module load hdf5-mpi/1.10.6
 
