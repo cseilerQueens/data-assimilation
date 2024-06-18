@@ -149,6 +149,8 @@ names(lowerBound) <- NULL
 names(upper) <- NULL
 names(lower) <- NULL
 
+write.table(x = normParameterValues, file = "normParameterValues")
+
 run_classic_file <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/run_classic.sh"
 # run_classic_file <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/test.sh"
 
@@ -170,13 +172,6 @@ nc.mod03 <- file.path(dir.mod, "hfls_monthly.nc")
 nc.mod04 <- file.path(dir.mod, "hfss_monthly.nc")
 nc.mod05 <- file.path(dir.mod, "ts_monthly.nc")
 nc.mod06 <- file.path(dir.mod, "albs_monthly.nc")
-
-# nc.ref01 <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2022/netcdf_files/gpp_monthly.nc"
-# nc.ref02 <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2022/netcdf_files/lai_monthly.nc"
-# nc.ref03 <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2022/netcdf_files/hfls_monthly.nc"
-# nc.ref04 <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2022/netcdf_files/hfss_monthly.nc"
-# nc.ref05 <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2022/netcdf_files/ts_monthly.nc"
-# nc.ref06 <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2022/netcdf_files/albs_monthly.nc"
 
 # GPP
 nc.ref01a <- file.path(dir.ref, "gpp_GOSIF_128x64.nc")
@@ -202,6 +197,9 @@ nc.ref05a <- file.path(dir.ref, "MOYD11C3_128x64.nc")
 nc.ref06a <- file.path(dir.ref, "albs_CERES_128x64.nc")
 nc.ref06b <- file.path(dir.ref, "albs_GEWEXSRB_128x64.nc")
 nc.ref06c <- file.path(dir.ref, "albedo_MODIS_128x64.nc")
+
+
+
 
 mod.list <- list(
   nc.mod01, nc.mod01,

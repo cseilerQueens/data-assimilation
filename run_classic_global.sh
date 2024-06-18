@@ -15,7 +15,7 @@
 #-------------------------------------------------------
 
 # simulation ID
-simulationID=transient_CRUJRAv2.4.5_opt28par
+simulationID=transient_CRUJRAv2.4.5_I1901
 
 # Meteorological forcing
 metForcing=CRUJRAv2.4.5
@@ -24,17 +24,19 @@ metForcing=CRUJRAv2.4.5
 simulationType=transient # current options: spinup, transient, ssp585
 
 # Is this the last 100 years of the spinup with spinfast = 1?
-lastPart=FALSE # TRUE or FALSE
+lastPart=TRUE # TRUE or FALSE
 
 # Restart file
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/initfiles/global/T63/rsFilev02.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt28par/netcdf_files/rsFile_modified.nc'
-init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt28par_lastPart/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt28par_lastPart/netcdf_files/rsFile_modified.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5/netcdf_files/rsFile_modified.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_lastPart/netcdf_files/rsFile_modified.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2000/netcdf_files/rsFile_modified.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/rsFile_daisy.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt_lastPart/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_I1901/netcdf_files/rsFile_modified.nc'
+init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_I1901_lastPart/netcdf_files/rsFile_modified.nc'
 # For DRA cluster: Make sure that there are no NaN's in FLND, set them to zero.
 
 # Run CLASSIC globally (global), a subset of grid cells (multipleGridCells) or a single grid cell only (local)?

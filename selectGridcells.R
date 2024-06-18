@@ -1,5 +1,7 @@
 .libPaths("/home/cseiler/AMBER/renv/library/R-4.3/x86_64-pc-linux-gnu")
 
+setwd("/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation")
+
 library(raster)
 rm(list=ls())
 

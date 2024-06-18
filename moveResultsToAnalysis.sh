@@ -1,8 +1,8 @@
-destiation="/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/analysis/ALBS-GPP-HFLS-HFSS-LAI-TS-SUG-28par-200GC"
+destination="/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/analysis/ALBS-GPP-HFLS-HFSS-LAI-TS-SUG-28par-60GC-I1901"
 
-mkdir $destiation
-mv *.png $destiation
-mv *.rds $destiation
-mv best*.txt $destiation
-mv daisyOutput_* $destiation
-cp *.R $destiation
+mkdir $destination
+mv *.png $destination
+mv *.rds $destination
+mv best*.txt $destination
+mv daisyOutput_* $destination
+cp *.R $destination
