@@ -106,7 +106,7 @@ names(lowerBound) <- NULL
 
 # object <- readRDS("objectFinal.rds")
 # normParameterValues <- object@solution
-object <- readRDS("../data-assimilation02/object.rds")
+object <- readRDS("../data-assimilation/object.rds")
 normParameterValues <- object@bestSol[[14]]
 
 n <- length(parameterNames)

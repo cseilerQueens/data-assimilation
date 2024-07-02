@@ -246,6 +246,78 @@ source("ga_daisy.R")
 
 setwd("/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation")
 
+# Different options for selection, crossover, and mutation:
+
+# Selection:
+# gareal_lrSelection: Linear-rank selection (default)
+# gareal_nlrSelection: Nonlinear-rank selection
+# gareal_rwSelection: roulette wheel selection
+# gareal_tourSelection: (Unbiased) tournament selection
+# gareal_lsSelection: Fitness proportional selection with fitness linear scaling
+# gareal_sigmaSelection Fitness proportional selection with Goldberg’s sigma truncation scaling
+
+# Crossover
+# gareal_spCrossover: Single-point crossover
+# gareal_uCrossover: Uniform crossover
+# gareal_waCrossover: Whole arithmetic crossover
+# gareal_laCrossover: Local arithmetic crossover (default)
+# gareal_blxCrossover: Blend crossover
+
+# Mutation
+# gareal_raMutation: Uniform random mutation (default)
+# gareal_nraMutation: Nonuniform random mutation
+# gareal_rsMutation: Random mutation around the solution
+
+
+
+selection <- c(
+  "gareal_lrSelection",
+  "gareal_nlrSelection",
+  "gareal_rwSelection",
+  "gareal_tourSelection",
+  "gareal_lsSelection",
+  "gareal_sigmaSelection")
+
+crossover <- c(
+  "gareal_spCrossover",
+  "gareal_uCrossover",
+  "gareal_waCrossover",
+  "gareal_laCrossover",
+  "gareal_blxCrossover")
+
+mutation <- c(
+  "gareal_raMutation",
+  "gareal_nraMutation",
+  "gareal_rsMutation")
+
+# default: selection = 1, crossover = 4, mutation = 1 (S1C4M1)
+# options S1-6, C1-5, M1-3
+
+# default
+# S1C4M1
+
+# selection
+# S2C4M1
+# S3C4M1
+# S4C4M1
+# S5C4M1
+# S6C4M1
+
+# crossover
+# S1C1M1
+# S1C2M1
+# S1C3M1
+# S1C5M1
+
+# mutation
+# S1C4M2
+# S1C4M3
+
+
+my.selection <- selection[1]
+my.crossover <- selection[1]
+my.mutation <- selection[1]
+
 result <- ga_daisy(
     type = "real-valued",
     fitness = cost.fun,
@@ -262,10 +334,14 @@ result <- ga_daisy(
     modelOutputFolder = modelOutputFolder,
     lower = lower,
     upper = upper,
-    popSize = 20,
+    population = "gareal_Population",
+    selection = "gareal_tourSelection",
+    crossover = "gareal_spCrossover",
+    mutation = "gareal_raMutation",
+    popSize = 100,
     elitism = 4,
-    maxiter = 50,
-    run = 5,
+    maxiter = 3,
+    run = 3,
     maxFitness = 1,
     suggestions = normParameterValues,
     keepBest = TRUE,
