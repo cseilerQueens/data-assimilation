@@ -6,7 +6,7 @@ library(raster)
 rm(list=ls())
 
 # Number of grid cells to sample:
-nGridcells <- 20 # 60
+nGridcells <- 40 # 60
 minFracArea <- 1
 my.seed <- 1 # 7
 

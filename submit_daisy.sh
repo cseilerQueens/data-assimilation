@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=10G
-#SBATCH --time=00:30:00
+#SBATCH --time=00:15:00
 #SBATCH --job-name=DAISYtest
 #SBATCH --output=/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/daisy.out
 #SBATCH --mail-user=christian.seiler@queensu.ca

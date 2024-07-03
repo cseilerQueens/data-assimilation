@@ -170,7 +170,7 @@ transientCO2=.true.
 lnduseon=.true.
 transientLGHT=.true.
 readMetStartYear=2001 # 1701 # 2001-2010 for tuning
-readMetEndYear=2002 #2010 # 2022 # 2010 # 2001-2010 for tuning
+readMetEndYear=2010 # 2022 # 2010 # 2001-2010 for tuning
 spinfast=1
 metLoop=1
 leap=.false.
@@ -419,9 +419,9 @@ echo "#!/bin/sh
 #SBATCH --account=def-cseiler-ab 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-# #SBATCH --exclusive
+#SBATCH --exclusive
 #SBATCH --mem=10G
-#SBATCH --time=00:30:00
+#SBATCH --time=00:10:00
 #SBATCH --job-name=$simulationID
 #SBATCH --output=/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/classic.out
 #SBATCH --error=errors_CLASSIC
