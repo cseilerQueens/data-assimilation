@@ -294,29 +294,26 @@ mutation <- c(
 # options S1-6, C1-5, M1-3
 
 # default
-# S1C4M1
+S1C4M1 <- c(selection[1], crossover[4], mutation[1])
 
 # selection
-# S2C4M1
-# S3C4M1
-# S4C4M1
-# S5C4M1
-# S6C4M1
+S2C4M1 <- c(selection[2], crossover[4], mutation[1])
+S3C4M1 <- c(selection[3], crossover[4], mutation[1])
+S4C4M1 <- c(selection[4], crossover[4], mutation[1])
+S5C4M1 <- c(selection[5], crossover[4], mutation[1])
+S6C4M1 <- c(selection[6], crossover[4], mutation[1])
 
 # crossover
-# S1C1M1
-# S1C2M1
-# S1C3M1
-# S1C5M1
+S1C1M1 <- c(selection[1], crossover[1], mutation[1])
+S1C2M1 <- c(selection[1], crossover[2], mutation[1])
+S1C3M1 <- c(selection[1], crossover[3], mutation[1])
+S1C5M1 <- c(selection[1], crossover[5], mutation[1])
 
 # mutation
-# S1C4M2
-# S1C4M3
+S1C4M2 <- c(selection[1], crossover[4], mutation[2])
+S1C4M3 <- c(selection[1], crossover[4], mutation[3])
 
-
-my.selection <- selection[1]
-my.crossover <- selection[1]
-my.mutation <- selection[1]
+selCroMut <- S1C4M1
 
 result <- ga_daisy(
     type = "real-valued",
@@ -334,10 +331,9 @@ result <- ga_daisy(
     modelOutputFolder = modelOutputFolder,
     lower = lower,
     upper = upper,
-    population = "gareal_Population",
-    selection = "gareal_tourSelection",
-    crossover = "gareal_spCrossover",
-    mutation = "gareal_raMutation",
+    selection = selCroMut[1],
+    crossover = selCroMut[2],
+    mutation = selCroMut[3],
     popSize = 100,
     elitism = 4,
     maxiter = 20,
