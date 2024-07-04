@@ -419,7 +419,7 @@ echo "#!/bin/sh
 #SBATCH --account=def-cseiler-ab 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --exclusive
+# #SBATCH --exclusive
 #SBATCH --mem=10G
 #SBATCH --time=00:10:00
 #SBATCH --job-name=$simulationID
