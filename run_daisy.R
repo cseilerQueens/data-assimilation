@@ -248,70 +248,43 @@ setwd("/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation")
 
 # Different options for selection, crossover, and mutation:
 
-# Selection:
-# gareal_lrSelection: Linear-rank selection (default)
-# gareal_nlrSelection: Nonlinear-rank selection
-# gareal_rwSelection: roulette wheel selection
-# gareal_tourSelection: (Unbiased) tournament selection
-# gareal_lsSelection: Fitness proportional selection with fitness linear scaling
-# gareal_sigmaSelection Fitness proportional selection with Goldberg’s sigma truncation scaling
-
-# Crossover
-# gareal_spCrossover: Single-point crossover
-# gareal_uCrossover: Uniform crossover
-# gareal_waCrossover: Whole arithmetic crossover
-# gareal_laCrossover: Local arithmetic crossover (default)
-# gareal_blxCrossover: Blend crossover
-
-# Mutation
-# gareal_raMutation: Uniform random mutation (default)
-# gareal_nraMutation: Nonuniform random mutation
-# gareal_rsMutation: Random mutation around the solution
-
-
-
 selection <- c(
-  "gareal_lrSelection",
-  "gareal_nlrSelection",
-  "gareal_rwSelection",
-  "gareal_tourSelection",
-  "gareal_lsSelection",
-  "gareal_sigmaSelection")
+"gareal_lrSelection",
+"gareal_nlrSelection", 
+"gareal_rwSelection",
+"gareal_tourSelection", 
+"gareal_lsSelection", 
+"gareal_sigmaSelection")
 
 crossover <- c(
-  "gareal_spCrossover",
-  "gareal_uCrossover",
-  "gareal_waCrossover",
-  "gareal_laCrossover",
-  "gareal_blxCrossover")
+"gareal_spCrossover",
+"gareal_waCrossover",
+"gareal_laCrossover",
+"gareal_blxCrossover",
+"gareal_laplaceCrossover")
 
 mutation <- c(
-  "gareal_raMutation",
-  "gareal_nraMutation",
-  "gareal_rsMutation")
+"gareal_raMutation",
+"gareal_nraMutation",
+"gareal_rsMutation",
+"gareal_powMutation")
 
-# default: selection = 1, crossover = 4, mutation = 1 (S1C4M1)
-# options S1-6, C1-5, M1-3
 
-# default
-S1C4M1 <- c(selection[1], crossover[4], mutation[1])
+# options S1-6, C1-5, M1-4
 
-# selection
-S2C4M1 <- c(selection[2], crossover[4], mutation[1])
-S3C4M1 <- c(selection[3], crossover[4], mutation[1])
-S4C4M1 <- c(selection[4], crossover[4], mutation[1])
-S5C4M1 <- c(selection[5], crossover[4], mutation[1])
-S6C4M1 <- c(selection[6], crossover[4], mutation[1])
-
-# crossover
 S1C1M1 <- c(selection[1], crossover[1], mutation[1])
+S2C1M1 <- c(selection[2], crossover[1], mutation[1])
+S3C1M1 <- c(selection[3], crossover[1], mutation[1])
+S4C1M1 <- c(selection[4], crossover[1], mutation[1])
+S5C1M1 <- c(selection[5], crossover[1], mutation[1])
+S6C1M1 <- c(selection[6], crossover[1], mutation[1])
 S1C2M1 <- c(selection[1], crossover[2], mutation[1])
 S1C3M1 <- c(selection[1], crossover[3], mutation[1])
+S1C4M1 <- c(selection[1], crossover[4], mutation[1])
 S1C5M1 <- c(selection[1], crossover[5], mutation[1])
-
-# mutation
-S1C4M2 <- c(selection[1], crossover[4], mutation[2])
-S1C4M3 <- c(selection[1], crossover[4], mutation[3])
+S1C1M2 <- c(selection[1], crossover[1], mutation[2])
+S1C1M3 <- c(selection[1], crossover[1], mutation[3])
+S1C1M4 <- c(selection[1], crossover[1], mutation[4])
 
 selCroMut <- S1C4M1
 
