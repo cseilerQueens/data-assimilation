@@ -272,6 +272,7 @@ mutation <- c(
 
 # options S1-6, C1-5, M1-4
 
+# Find the importance of selection, crossover, and mutation
 S1C1M1 <- c(selection[1], crossover[1], mutation[1])
 S2C1M1 <- c(selection[2], crossover[1], mutation[1])
 S3C1M1 <- c(selection[3], crossover[1], mutation[1])
@@ -285,6 +286,13 @@ S1C5M1 <- c(selection[1], crossover[5], mutation[1])
 S1C1M2 <- c(selection[1], crossover[1], mutation[2])
 S1C1M3 <- c(selection[1], crossover[1], mutation[3])
 S1C1M4 <- c(selection[1], crossover[1], mutation[4])
+
+# Choosing M = 2 and setting C = 1, find the best method for S
+S2C1M2 <- c(selection[2], crossover[1], mutation[2])
+S3C1M2 <- c(selection[3], crossover[1], mutation[2])
+S4C1M2 <- c(selection[4], crossover[1], mutation[2])
+S5C1M2 <- c(selection[5], crossover[1], mutation[2])
+S6C1M2 <- c(selection[6], crossover[1], mutation[2])
 
 selCroMut <- S1C4M1
 
