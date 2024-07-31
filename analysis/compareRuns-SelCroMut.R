@@ -24,7 +24,13 @@ experiments <- c(
   "S4C1M1", 
   "S5C1M1", 
   "S6C1M1",
-  "S3C5M2")
+  "S3C5M2",
+  
+  "S2C1M2", 
+  "S3C1M2", 
+  "S4C1M2", 
+  "S5C1M2", 
+  "S6C1M2")
 
 experiment <- list()
 
@@ -51,7 +57,7 @@ df <- data.frame(object@summary)
 y <- df$median
 
 plot(y, type = "l", col = NA, 
-     ylim = c(0.64, 0.67),
+     ylim = c(0.64, 0.68),
      xlim = c(1,23),
      xlab = "Generation",
      ylab = "Median AMBER Score (-)")
@@ -68,7 +74,7 @@ for (i in 1:length(experiment))
   print(y)
 }
 
-legend("right", experiments,  text.col = my.col, pch = 1:length(experiment), col = my.col, bty = "n")
+legend("right", experiments,  text.col = my.col, pch = 1:length(experiment), col = my.col, bty = "n", cex = 0.75)
 legend("topleft", c("Population Size: 100", "Gridcells: 40", "Period: 2001-2010"), bty = "n")
 dev.off()
 

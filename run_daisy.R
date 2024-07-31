@@ -294,6 +294,12 @@ S4C1M2 <- c(selection[4], crossover[1], mutation[2])
 S5C1M2 <- c(selection[5], crossover[1], mutation[2])
 S6C1M2 <- c(selection[6], crossover[1], mutation[2])
 
+# Choosing M = 2 and S = 5, find the best method for C
+S5C2M2 <- c(selection[5], crossover[2], mutation[2])
+S5C3M2 <- c(selection[5], crossover[3], mutation[2])
+S5C4M2 <- c(selection[5], crossover[4], mutation[2])
+S5C5M2 <- c(selection[5], crossover[5], mutation[2])
+
 selCroMut <- S1C4M1
 
 result <- ga_daisy(
