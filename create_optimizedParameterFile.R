@@ -104,10 +104,10 @@ names(lowerBound) <- NULL
 
 # (2) Convert the optimized normalized parameter values to actual parameter values and write them to a parameter file
 
-# object <- readRDS("objectFinal.rds")
-# normParameterValues <- object@solution
-object <- readRDS("../data-assimilation/object.rds")
-normParameterValues <- object@bestSol[[14]]
+object <- readRDS("analysis/ALBS-GPP-HFLS-HFSS-LAI-TS-PAR28-GC80-P100-I1901/objectFinal.rds")
+normParameterValues <- object@solution
+# object <- readRDS("../data-assimilation/object.rds")
+# normParameterValues <- object@bestSol[[14]]
 
 n <- length(parameterNames)
 

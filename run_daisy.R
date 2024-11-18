@@ -18,7 +18,7 @@
 # vmax(10:12) = 55.0e-06, 15.0e-06, 0.00e-06,
 
 
-.libPaths("/home/cseiler/daisy/renv")
+.libPaths(c("/home/cseiler/daisy/renv", .libPaths()))
 library(daisy)
 rm(list = ls())
 
@@ -26,6 +26,45 @@ setwd('/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation')
 
 # Copy default parameter run_parameters.txt file to current work directory
 # This file will be overwritten with new values before CLASSIC is run
+
+# Number of nodes to run meta-jobs on.
+parallel <- 10
+# Time for each meta-job.
+metajobTime <- "168:00:00"
+# The farm name.
+farmName <- "CLASSIC_meta"
+# Directory path for the data-assimilation folder
+dataAssimPath <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation"
+# Archive folder for meta runs.
+archiveFolder <- paste0(farmName, "_ARCHIVE")
+# Make the archive folder if it does not exist already.
+if (!file.exists(paste0(farmName, "_ARCHIVE"))) {system(paste0("mkdir ", farmName, "_ARCHIVE"))}
+Sys.sleep(1)
+
+# Check if there is an object.rds file in the farm directory from a previous run. If there is,
+# copy it to the data-assimilation folder before deleting the farm directory. Since the file
+# will always be called object.rds, let ga_daisy know that an object file exists in the data-assimilation
+# folder.
+if (file.exists(paste0(farmName, "/object.rds"))) {
+
+  # Remove a previous object.rds file from the dataAssimPath and replace it with
+  # this new one.
+  if (file.exists(paste0(dataAssimPath, "/object.rds"))) {
+    system(paste0("rm ", dataAssimPath, "/object.rds"))
+    Sys.sleep(2)
+  }
+  
+  system(paste0("mv ", farmName, "/object.rds ", dataAssimPath))
+  previousObject <- paste(dataAssimPath, "object.rds", sep = "/")
+  Sys.sleep(3)
+  
+} else {
+  previousObject <- NULL
+}
+
+# Remove folder if it already exists from a previous run.
+if (file.exists(farmName)) {system(paste("rm -rf", farmName))}
+Sys.sleep(1)
 
 system('cp /home/cseiler/classic/classic_code/classic/configurationFiles/default_run_parameters.txt run_parameters.txt')
 
@@ -38,8 +77,6 @@ parameterNames <- list("vmax", "kn", "thrprcnt", "alpha_phtsyn", "lfespany", "gr
                 "coldlmt", "roothrsh", "abar", "vpd0", "albnir", "TCSAND", 
                 "TCCLAY", "ZOLNS", "minlvfr", "omega")
 
-# parameterNames <- list("vmax", "kn")
-
 parameterValues <- list()
 
 for (i in parameterNames) {
@@ -50,7 +87,6 @@ for (i in parameterNames) {
 # CLASSIC has 12 PFTs, however, the default configuration only uses 9 PFTs.
 # The PFTs that are not being used have parameter values that are equal to zero.
 # Those values need to be excluded, otherwise the optimization will not work
-
 
 # For single parameter
 # non_zero_indices <- which(parameterValues != 0, arr.ind = TRUE)
@@ -130,7 +166,8 @@ for (p in 1:length(parameterValues)) {
 }
 
 parameterValueLength <- sapply(normalization, length)
-normParameterValues <- unlist(normalization)
+normParameterValues <- unlist(normalization) 
+
 upperBound <- unlist(upperBound)
 lowerBound <- unlist(lowerBound) 
 
@@ -198,16 +235,12 @@ nc.ref06a <- file.path(dir.ref, "albs_CERES_128x64.nc")
 nc.ref06b <- file.path(dir.ref, "albs_GEWEXSRB_128x64.nc")
 nc.ref06c <- file.path(dir.ref, "albedo_MODIS_128x64.nc")
 
-
-
-
 mod.list <- list(
   nc.mod01, nc.mod01,
   nc.mod02, nc.mod02, nc.mod02,
   nc.mod03, nc.mod03,
   nc.mod04, nc.mod04,
-  nc.mod05,
-  nc.mod06, nc.mod06, nc.mod06
+  nc.mod05,   nc.mod06, nc.mod06, nc.mod06
 )
 
 ref.list <- list(
@@ -238,7 +271,14 @@ ref.id.list <- list("GPP-GOSIF", "GPP-FLUXCOM",
                     "TS-MODIS",
                     "ALBS-CERES", "ALBS-GEWEXSRB", "ALBS-MODIS")
 
+# modelOutputFolder is the folder for the model while the model is running the individual.
 modelOutputFolder <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/daisyRun"
+
+# By default, keepOutput is FALSE and simFolder is NULL.
+# keepOutput is a logical argument determining whether output is kept.
+keepOutput <- FALSE
+# simFolder is the folder where finished model output is moved to.
+simFolder <- "/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations"
 
 library("GA")
 
@@ -249,25 +289,25 @@ setwd("/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation")
 # Different options for selection, crossover, and mutation:
 
 selection <- c(
-"gareal_lrSelection",
-"gareal_nlrSelection", 
-"gareal_rwSelection",
-"gareal_tourSelection", 
-"gareal_lsSelection", 
-"gareal_sigmaSelection")
+  "gareal_lrSelection",
+  "gareal_nlrSelection", 
+  "gareal_rwSelection",
+  "gareal_tourSelection", 
+  "gareal_lsSelection", 
+  "gareal_sigmaSelection")
 
 crossover <- c(
-"gareal_spCrossover",
-"gareal_waCrossover",
-"gareal_laCrossover",
-"gareal_blxCrossover",
-"gareal_laplaceCrossover")
+  "gareal_spCrossover",
+  "gareal_waCrossover",
+  "gareal_laCrossover",
+  "gareal_blxCrossover",
+  "gareal_laplaceCrossover")
 
 mutation <- c(
-"gareal_raMutation",
-"gareal_nraMutation",
-"gareal_rsMutation",
-"gareal_powMutation")
+  "gareal_raMutation",
+  "gareal_nraMutation",
+  "gareal_rsMutation",
+  "gareal_powMutation")
 
 
 # options S1-6, C1-5, M1-4
@@ -300,8 +340,7 @@ S5C3M2 <- c(selection[5], crossover[3], mutation[2])
 S5C4M2 <- c(selection[5], crossover[4], mutation[2])
 S5C5M2 <- c(selection[5], crossover[5], mutation[2])
 
-selCroMut <- S1C4M1
-
+selCroMut <- S5C1M2
 result <- ga_daisy(
     type = "real-valued",
     fitness = cost.fun,
@@ -318,15 +357,21 @@ result <- ga_daisy(
     modelOutputFolder = modelOutputFolder,
     lower = lower,
     upper = upper,
-    selection = selCroMut[1],
-    crossover = selCroMut[2],
-    mutation = selCroMut[3],
-    popSize = 100,
-    elitism = 4,
-    maxiter = 20,
-    run = 20,
+    popSize = 100, # 40
+    elitism = 4, # 4,
+    maxiter = 25, # 20
+    run = 25, # 20
     maxFitness = 1,
+    parallel = parallel,
+    jobTime = metajobTime,
+    farmName = farmName,
+    dataAssimPath = dataAssimPath,
+    previousObject = previousObject,
     suggestions = normParameterValues,
     keepBest = TRUE,
+    keepOutput = keepOutput,
+    archiveFolder = archiveFolder,
+    finalOutputFolder = simFolder,
     seed = 1)
 saveRDS(result, "result.rds")
+

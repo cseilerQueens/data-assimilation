@@ -169,7 +169,7 @@ fixedYear=1700
 transientCO2=.true.
 lnduseon=.true.
 transientLGHT=.true.
-readMetStartYear=2001 # 1701 # 2001-2010 for tuning
+readMetStartYear=1901 # 1701 # 2001-2010 for tuning
 readMetEndYear=2010 # 2022 # 2010 # 2001-2010 for tuning
 spinfast=1
 metLoop=1
@@ -180,7 +180,7 @@ transientPOPD=.true.
 domonthoutput=.true.
 doperpftoutput=.false.
 doAnnualOutput=.false.
-JMOSTY=1970
+JMOSTY=2001 #1970
 fi
 
 #-------------------------------------------------------
@@ -210,7 +210,7 @@ fi
 # (II) Code below should work as is, no changes required
 #-------------------------------------------------------
 # Create output directory
-rm -r -f $outputDir
+rm -rf $outputDir
 mkdir $outputDir
 mkdir $outputDir/outputFiles
 
@@ -232,7 +232,9 @@ echo
 cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_ntask20.sh $outputDir/classic_submit.sh
 if [ $spatialCoverage == multipleGridCells ]
 then
-cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy.sh $outputDir/classic_submit.sh
+# cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy.sh $outputDir/classic_submit.sh
+cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy_1901.sh $outputDir/classic_submit.sh
+
 fi
 echo "Copy classic_submit.sh to output directory completed"
 echo
@@ -274,7 +276,10 @@ echo
 # Copy template_run_parameters.txt to CLASSIC output folder
 # cp $sourceCodeDir/configurationFiles/default_run_parameters.txt $outputDir/run_parameters.txt
 # cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/template_run_parameters.txt $outputDir/run_parameters.txt
-cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/run_parameters.txt $outputDir/run_parameters.txt
+# cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/run_parameters.txt $outputDir/run_parameters.txt
+cp run_parameters.txt $outputDir/run_parameters.txt
+sleep 1
+rm run_parameters.txt
 
 runparams_file=$outputDir/run_parameters.txt
 echo "Copy run_parameters.txt to output directory completed"
@@ -388,7 +393,10 @@ echo
 if [ $spatialCoverage == global ]
 then
 # Copy this script into output folder
-cp run_classic.sh $outputDir
+cp run_classic.sh $outputDir/run_classic.sh
+sleep 1
+# Remove the script from the current location so that there are no duplicates.
+rm run_classic.sh
 # Submit classic run
 cd $outputDir
 chmod +x classic_submit.sh
@@ -398,7 +406,10 @@ fi
 if [ $spatialCoverage == multipleGridCells ]
 then
 # Copy this script into output folder
-cp run_classic.sh $outputDir
+cp run_classic.sh $outputDir/run_classic.sh
+sleep 1
+# Remove the script from the current location so that there are no duplicates.
+rm run_classic.sh
 # Submit classic run
 cd $outputDir
 chmod +x classic_submit.sh
@@ -408,8 +419,10 @@ fi
 if [ $spatialCoverage == local ]
 then
 # Copy this script into output folder
-cp run_classic.sh $outputDir
-
+cp run_classic.sh $outputDir/run_classic.sh
+sleep 1
+# Remove the script from the current location so that there are no duplicates.
+rm run_classic.sh
 # Create the submission script
 cd $outputDir
 
@@ -419,13 +432,13 @@ echo "#!/bin/sh
 #SBATCH --account=def-cseiler-ab 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-# #SBATCH --exclusive
+#SBATCH --exclusive
 #SBATCH --mem=10G
 #SBATCH --time=00:10:00
 #SBATCH --job-name=$simulationID
 #SBATCH --output=/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/classic.out
 #SBATCH --error=errors_CLASSIC
-# #SBATCH --mail-user=$email
+#SBATCH --mail-user=$email
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
 

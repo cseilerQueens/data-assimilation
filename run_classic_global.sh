@@ -15,28 +15,27 @@
 #-------------------------------------------------------
 
 # simulation ID
-simulationID=transient_CRUJRAv2.4.5_I1901
+simulationID="ssp585_ISIMIP3b.CanESM5-opt"
 
 # Meteorological forcing
-metForcing=CRUJRAv2.4.5
+metForcing=ISIMIP3b.CanESM5 #CRUJRAv2.4.5 or ISIMIP3b.CanESM5
 
 # spinup or transient?
-simulationType=transient # current options: spinup, transient, ssp585
+simulationType=ssp585 # current options: spinup, transient, ssp585
 
 # Is this the last 100 years of the spinup with spinfast = 1?
 lastPart=TRUE # TRUE or FALSE
 
 # Restart file
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/initfiles/global/T63/rsFilev02.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt28par/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt28par_lastPart/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_lastPart/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2000/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/rsFile_daisy.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_opt_lastPart/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_I1901/netcdf_files/rsFile_modified.nc'
-init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5_I1901_lastPart/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_ISIMIP3b.CanESM5-part01/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_ISIMIP3b.CanESM5-part05/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_ISIMIP3b.CanESM5/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_ISIMIP3b.CanESM5-opt-part05/netcdf_files/rsFile_modified.nc'
+init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_ISIMIP3b.CanESM5-opt/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5-opt-20241028/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5-opt-20241028-lastPart/netcdf_files/rsFile_modified.nc'
+
 # For DRA cluster: Make sure that there are no NaN's in FLND, set them to zero.
 
 # Run CLASSIC globally (global), a subset of grid cells (multipleGridCells) or a single grid cell only (local)?
@@ -81,7 +80,7 @@ inibioclim=.true.
 if [ $PFTCompetition == .true. ] && [ $simulationType == spinup ] && [ $lastPart == FALSE ]
 then
 start_bare=.true.
-inibioclim =.false.
+inibioclim=.false.
 fi
 
 if [ $simulationType == spinup ]
@@ -121,6 +120,59 @@ POPDFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/populatio
 LUCFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/landcover/global/T63/ESA_CCI_land_cover_with_LUH_TRENDY_v12_crops_9_PFTs_T63_1700_2022.nc'
 LGHTFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/lightning/global/T63/lisotd_1995_2014_climtlgl_lghtng_as_ts_1700_2050_chunked.nc'
 fi
+
+
+#---------------------------------------------------
+# ISIMIP3b.CanESM5
+#---------------------------------------------------
+
+if [ $metForcing == ISIMIP3b.CanESM5 ] && [ $simulationType == spinup ]
+then
+# update these directories
+metFileFss=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/rsds_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'  
+metFileFdl=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/rlds_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'
+metFilePre=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/pr_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'
+metFileTa=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/tas_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'
+metFileQa=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/huss_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'
+metFileUv=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/sfcwind_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'
+metFilePres=$metDataDir'/ISIMIP3b/CanESM5/piControl/r1i1p1f1/ps_6hr_CanESM5_piControl_r1i1p1f1_isimip_16010101_21001231.nc'
+
+FERFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/nitrogen/global/T63/T63_N_fertilizer_input4MIPs_CMIP6_hist_1850_2014.nc'
+DEPFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/nitrogen/global/T63/T63_N_deposition_input4MIPs_CMIP6_hist_1850_2014.nc'
+
+fi
+
+if [ $metForcing == ISIMIP3b.CanESM5 ] && [ $simulationType == transient ]
+then
+metFileFss=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/rsds_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'  
+metFileFdl=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/rlds_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'
+metFilePre=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/pr_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'
+metFileTa=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/tas_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'
+metFileQa=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/huss_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'
+metFileUv=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/sfcwind_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'
+metFilePres=$metDataDir'/ISIMIP3b/CanESM5/historical/r1i1p1f1/ps_6hr_CanESM5_historical_r1i1p1f1_isimip_18500101_20141231.nc'
+
+FERFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/nitrogen/global/T63/T63_N_fertilizer_input4MIPs_CMIP6_hist_1850_2014.nc'
+DEPFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/nitrogen/global/T63/T63_N_deposition_input4MIPs_CMIP6_hist_1850_2014.nc'
+
+fi
+
+if [ $metForcing == ISIMIP3b.CanESM5 ] && [ $simulationType == ssp585 ]
+then
+# update these directories
+metFileFss=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/rsds_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'  
+metFileFdl=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/rlds_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'
+metFilePre=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/pr_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'
+metFileTa=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/tas_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'
+metFileQa=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/huss_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'
+metFileUv=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/sfcwind_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'
+metFilePres=$metDataDir'/ISIMIP3b/CanESM5/ssp585/r1i1p1f1/ps_6hr_CanESM5_ssp585_r1i1p1f1_isimip_20150101_21001231.nc'
+
+FERFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/nitrogen/global/T63/T63_N_fertilizer_input4MIPs_CMIP6_ssp585_2015_2100.nc'
+DEPFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/nitrogen/global/T63/T63_N_deposition_input4MIPs_CMIP6_ssp585_2015_2100.nc'
+
+fi
+
 
 # Additional inputs
 CH4File='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/CH4/CH4_1700_2017_for_GCP_2018.nc'
@@ -183,8 +235,83 @@ transientPOPD=.true.
 
 domonthoutput=.true.
 doperpftoutput=.false.
-doAnnualOutput=.false.
+doAnnualOutput=.true.
 JMOSTY=1970
+fi
+
+if [ $metForcing == ISIMIP3b.CanESM5 ] && [ $simulationType == spinup ]
+then
+fixedYear=1850
+transientCO2=.false.
+CO2File='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/CO2/CO2_CMIP6_1850_2014_input4MIPs.nc'
+lnduseon=.false.
+LUCFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/landcover/global/T63/CMIP6_LUH_v2h_ESA_CCI_landcover_9_PFTs_CTEM_1850_2014.nc'
+transientLGHT=.true. # MUST BE SET TO .true. IF DATA INCLUDES LEAP DAYS. WILL FAIL OTHERWISE.
+LGHTFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/lightning/global/T63/lightning_withLeapDays_16010101-21001231.nc'
+readMetStartYear=1901 # 1601
+readMetEndYear=2000 # 2000
+spinfast=10
+metLoop=1 
+if [ $lastPart == TRUE ]
+    then
+    spinfast=1
+    metLoop=1
+    readMetStartYear=1901
+fi
+leap=.true.
+allLocalTime=.true.
+transientPOPD=.false.
+POPDFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/population/global/T63/population_histsoc_annual_1850-2014_final.nc'
+domonthoutput=.false.
+doperpftoutput=.false.
+doAnnualOutput=.true.
+JMOSTY=$readMetStartYear
+fi
+
+if [ $metForcing == ISIMIP3b.CanESM5 ] && [ $simulationType == transient ]
+then
+fixedYear=1850
+transientCO2=.true.
+CO2File='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/CO2/CO2_CMIP6_1850_2014_input4MIPs.nc'
+lnduseon=.true.
+LUCFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/landcover/global/T63/CMIP6_LUH_v2h_ESA_CCI_landcover_9_PFTs_CTEM_1850_2014.nc'
+transientLGHT=.true.
+LGHTFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/lightning/global/T63/lightning_withLeapDays_16010101-21001231.nc'
+readMetStartYear=1850
+readMetEndYear=2014
+spinfast=1
+metLoop=1
+leap=.true.
+allLocalTime=.true.
+transientPOPD=.true.
+POPDFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/population/global/T63/population_histsoc_annual_1850-2014_final.nc'
+domonthoutput=.true.
+doAnnualOutput=.true.
+doperpftoutput=.true.
+JMOSTY=1970
+fi
+
+if [ $metForcing == ISIMIP3b.CanESM5 ] && [ $simulationType == ssp585 ]
+then
+fixedYear=1850
+transientCO2=.true.
+CO2File='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/CO2/CO2_CMIP6_2015_2100_ssp585_input4MIPs.nc'
+lnduseon=.true.
+LUCFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/landcover/global/T63/CMIP6_LUH_ESA_CCI_landcover_9_PFTs_CTEM_2015_2100_ssp5-8.5.nc'
+transientLGHT=.true.
+LGHTFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/lightning/global/T63/lightning_withLeapDays_16010101-21001231.nc'
+readMetStartYear=2015
+readMetEndYear=2100
+spinfast=1
+metLoop=1
+leap=.true.
+allLocalTime=.true.
+transientPOPD=.true.
+POPDFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/population/global/T63/population_ssp5soc_annual_2015-2100_final.nc'
+domonthoutput=.true.
+doAnnualOutput=.true.
+doperpftoutput=.true.
+JMOSTY=2015
 fi
 
 #-------------------------------------------------------
@@ -233,7 +360,7 @@ echo
 #-------------------------------------------------------
 # Copy classic_submit.sh from generalTools to output directory
 #-------------------------------------------------------
-cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_ntask20.sh $outputDir/classic_submit.sh
+cp /home/cseiler/classic/classic_production/templates/classic_submit_dra.sh $outputDir/classic_submit.sh
 if [ $spatialCoverage == multipleGridCells ]
 then
 cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy.sh $outputDir/classic_submit.sh
@@ -278,7 +405,7 @@ echo
 # Copy template_run_parameters.txt to CLASSIC output folder
 # cp $sourceCodeDir/configurationFiles/default_run_parameters.txt $outputDir/run_parameters.txt
 # cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/template_run_parameters.txt $outputDir/run_parameters.txt
-cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/run_parameters.txt $outputDir/run_parameters.txt
+cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/run_parameters.txt $outputDir/run_parameters.txt # optimized
 
 runparams_file=$outputDir/run_parameters.txt
 echo "Copy run_parameters.txt to output directory completed"

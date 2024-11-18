@@ -6,9 +6,9 @@ library(raster)
 rm(list=ls())
 
 # Number of grid cells to sample:
-nGridcells <- 40 # 60
+nGridcells <- 80 # 60
 minFracArea <- 1
-my.seed <- 1 # 7
+my.seed <- 7 # 1 for 40 GCs during tests
 
 
 # Get WWF Biomes
@@ -73,31 +73,32 @@ xy.allBiomes <- numeric()
 xyPerLat <- numeric()
 
 for (i in 1:12) {
-
-# Get biome and set 0 to NA
-biome <- biomes.list[[i]]
-biome[biome == 0] <- NA
-
-# Calculate the fraction of area covered by biome
-areaEachGridcell <- raster::area(biome) 
-areaEachGridcell <- areaEachGridcell * biome 
-areaBiome <- sum(getValues(areaEachGridcell), na.rm = TRUE)
-fractionBiome <- areaBiome / totalAreaBiomes
-
-nbiome <- round((fractionBiome * nGridcells))
-
-# Exclude cells based on minimum fractional cover
-biome <- biome * FLND 
-# Get coordinates
-xy <- xyFromCell(biome, which(biome[] == 1))
-# Randomly select grid cells for each biome
-
-set.seed(my.seed) 
-select <- sample(x = 1:nrow(xy), size = nbiome, replace = FALSE)
-xy <- xy[select,]
-xy <- matrix(xy, ncol = 2)
-
-xy.allBiomes <- rbind(xy.allBiomes, xy)
+  # Get biome and set 0 to NA
+  biome <- biomes.list[[i]]
+  biome[biome == 0] <- NA
+  
+  # Calculate the fraction of area covered by biome
+  areaEachGridcell <- raster::area(biome)
+  areaEachGridcell <- areaEachGridcell * biome
+  areaBiome <- sum(getValues(areaEachGridcell), na.rm = TRUE)
+  fractionBiome <- areaBiome / totalAreaBiomes
+  
+  nbiome <- round((fractionBiome * nGridcells))
+  
+  # Exclude cells based on minimum fractional cover
+  biome <- biome * FLND
+  # Get coordinates
+  xy <- xyFromCell(biome, which(biome[] == 1))
+  # Randomly select grid cells for each biome
+  
+  set.seed(my.seed)
+  select <- sample(x = 1:nrow(xy),
+                   size = nbiome,
+                   replace = FALSE)
+  xy <- xy[select, ]
+  xy <- matrix(xy, ncol = 2)
+  
+  xy.allBiomes <- rbind(xy.allBiomes, xy)
 }
 
 lon <- xy.allBiomes[,1]
