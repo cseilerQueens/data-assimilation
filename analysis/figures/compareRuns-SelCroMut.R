@@ -44,6 +44,9 @@ experiments <- c(
   "S5C5M2"
 )
 
+S5C1M2 <- readRDS(file.path(dir, "S5C1M2", "object.rds"))
+S1C1M1 <- readRDS(file.path(dir, "S1C1M1", "object.rds"))
+
 experiment <- list()
 
 for (i in experiments) {
@@ -57,29 +60,21 @@ for (i in experiments) {
   experiment[[i]] <- data
 }
 
+my.col <- rgb(0.5, 0.5, 0.5, alpha = 0.5)  # Semi-transparent color
+
 png(
-  "ScoreVsGen-SelCroMut.png",
-  width = 15,
-  height = 12,
+  "figures/SelCroMut.png",
+  width = 10,
+  height = 10,
   units = "cm",
   res = 500
 )
 par(
   mfrow = c(1, 1),
-  mar = c(4, 4, 2, 1),
+  mar = c(4, 4, 1, 1),
   lwd = 1,
   cex = 1
 )
-
-myPalette <- "plasma"
-my.col <-
-  viridis::viridis(
-    n = length(experiments),
-    begin = 0,
-    end = 1,
-    direction = 1,
-    option = myPalette
-  )
 
 object <- experiment[[1]]
 df <- data.frame(object@summary)
@@ -89,32 +84,45 @@ plot(
   y,
   type = "l",
   col = NA,
-  ylim = c(0.64, 0.67),
-  xlim = c(1, 24),
+  ylim = c(0.655, 0.675),
+  xlim = c(1, 20),
   xlab = "Generation",
-  ylab = "Median AMBER Score (-)")
+  ylab = "Maximum AMBER Score (-)")
 
 
 for (i in 1:length(experiment))
 {
   object <- experiment[[i]]
   df <- data.frame(object@summary)
-  y <- df$median
-  # y <- df$max
-  lines(y, col = my.col[i])
-  points(y, pch = i, col = my.col[i])
-  print(y)
+  # y <- df$median
+  y <- df$max
+  lines(y, col = my.col)
 }
 
-legend(
-  "right",
-  experiments,
-  text.col = my.col,
-  pch = 1:length(experiment),
-  col = my.col,
-  bty = "n",
-  cex = 0.7
-)
+object <- S5C1M2
+df <- data.frame(object@summary)
+# y <- df$median
+y <- df$max
+lines(y, col = "black", lty = 2)
+
+object <- S1C1M1
+df <- data.frame(object@summary)
+# y <- df$median
+y <- df$max
+lines(y, col = "red")
+
+
+
+#legend(
+#  "right",
+#  experiments,
+#  text.col = my.col,
+#  pch = 1:length(experiment),
+#  col = my.col,
+#  bty = "n",
+#  cex = 0.7
+#)
+
 legend("topleft",
        c("Population Size: 100", "Gridcells: 40", "Period: 2001-2010"),
        bty = "n")
@@ -140,11 +148,6 @@ print(df)
 
 plot(x = 1:length(df$max.score),
      y = df$max.score,)
-
-# Best candidates so far:
-# S = 3
-# C = 5
-# M = 2
 
 # difference:
 delta <- max(df$max.score) - min(df$max.score)
@@ -185,5 +188,4 @@ mutation <- c(
   "gareal_powMutation"
 )
 
-# S=5 already yields one of the best results, so I think that changing this to S3C5M3 will not cause a big difference
-# But the larger population seems to make a big difference, so that is good
+# Chosen combination: S5C1M2

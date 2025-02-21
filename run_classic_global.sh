@@ -28,13 +28,12 @@ lastPart=TRUE # TRUE or FALSE
 
 # Restart file
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/initfiles/global/T63/rsFilev02.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_ISIMIP3b.CanESM5-part01/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_ISIMIP3b.CanESM5-part05/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_ISIMIP3b.CanESM5/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5-opt-20250106/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5-opt-20250106-lastPart/netcdf_files/rsFile_modified.nc'
 # init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_ISIMIP3b.CanESM5-opt-part05/netcdf_files/rsFile_modified.nc'
+# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_ISIMIP3b.CanESM5/netcdf_files/rsFile_modified.nc'
 init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_ISIMIP3b.CanESM5-opt/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5-opt-20241028/netcdf_files/rsFile_modified.nc'
-# init_file='/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5-opt-20241028-lastPart/netcdf_files/rsFile_modified.nc'
+
 
 # For DRA cluster: Make sure that there are no NaN's in FLND, set them to zero.
 
@@ -248,15 +247,15 @@ lnduseon=.false.
 LUCFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/landcover/global/T63/CMIP6_LUH_v2h_ESA_CCI_landcover_9_PFTs_CTEM_1850_2014.nc'
 transientLGHT=.true. # MUST BE SET TO .true. IF DATA INCLUDES LEAP DAYS. WILL FAIL OTHERWISE.
 LGHTFile='/home/cseiler/projects/def-cseiler-ab/cseiler/classic_inputs/lightning/global/T63/lightning_withLeapDays_16010101-21001231.nc'
-readMetStartYear=1901 # 1601
-readMetEndYear=2000 # 2000
+readMetStartYear=1601
+readMetEndYear=1850
 spinfast=10
 metLoop=1 
 if [ $lastPart == TRUE ]
     then
     spinfast=1
     metLoop=1
-    readMetStartYear=1901
+    readMetStartYear=1751
 fi
 leap=.true.
 allLocalTime=.true.

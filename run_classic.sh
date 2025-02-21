@@ -169,8 +169,8 @@ fixedYear=1700
 transientCO2=.true.
 lnduseon=.true.
 transientLGHT=.true.
-readMetStartYear=1901 # 1701 # 2001-2010 for tuning
-readMetEndYear=2010 # 2022 # 2010 # 2001-2010 for tuning
+readMetStartYear=1701 # 1901 # 1901 # 1701 # 2001-2010 for tuning
+readMetEndYear=2020 # 2010 # 2022 # 2010 # 2001-2010 for tuning
 spinfast=1
 metLoop=1
 leap=.false.
@@ -180,7 +180,7 @@ transientPOPD=.true.
 domonthoutput=.true.
 doperpftoutput=.false.
 doAnnualOutput=.false.
-JMOSTY=2001 #1970
+JMOSTY=1980 # 2001 #1970
 fi
 
 #-------------------------------------------------------
@@ -232,8 +232,8 @@ echo
 cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_ntask20.sh $outputDir/classic_submit.sh
 if [ $spatialCoverage == multipleGridCells ]
 then
-# cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy.sh $outputDir/classic_submit.sh
-cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy_1901.sh $outputDir/classic_submit.sh
+cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy.sh $outputDir/classic_submit.sh
+# cp /home/cseiler/classic/classic_production/templates/classic_submit_dra_daisy_1901.sh $outputDir/classic_submit.sh
 
 fi
 echo "Copy classic_submit.sh to output directory completed"
@@ -277,7 +277,7 @@ echo
 # cp $sourceCodeDir/configurationFiles/default_run_parameters.txt $outputDir/run_parameters.txt
 # cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/template_run_parameters.txt $outputDir/run_parameters.txt
 # cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/run_parameters.txt $outputDir/run_parameters.txt
-cp run_parameters.txt $outputDir/run_parameters.txt
+cp run_parameters.txt $outputDir/run_parameters.txt ### USE THIS IN DAISY
 sleep 1
 rm run_parameters.txt
 

@@ -7,8 +7,8 @@ rm *ncks.tmp
 rm tmp*.nc
 
 # cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_2000/netcdf_files/rsFile_modified.nc rsFile.nc
-cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_1900/netcdf_files/rsFile_modified.nc rsFile.nc
-
+# cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/transient_CRUJRAv2.4.5_1900/netcdf_files/rsFile_modified.nc rsFile.nc
+cp /home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation/simulations/spinup_CRUJRAv2.4.5/netcdf_files/rsFile_modified.nc rsFile.nc
 Rscript selectGridcells.R
 
 # module load openmpi/4.0.3

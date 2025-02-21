@@ -28,9 +28,9 @@ setwd('/home/cseiler/projects/def-cseiler-ab/cseiler/data-assimilation')
 # This file will be overwritten with new values before CLASSIC is run
 
 # Number of nodes to run meta-jobs on.
-parallel <- 10
+parallel <- 20
 # Time for each meta-job.
-metajobTime <- "168:00:00"
+metajobTime <- "48:00:00"
 # The farm name.
 farmName <- "CLASSIC_meta"
 # Directory path for the data-assimilation folder
@@ -240,7 +240,8 @@ mod.list <- list(
   nc.mod02, nc.mod02, nc.mod02,
   nc.mod03, nc.mod03,
   nc.mod04, nc.mod04,
-  nc.mod05,   nc.mod06, nc.mod06, nc.mod06
+  nc.mod05, 
+  nc.mod06, nc.mod06, nc.mod06
 )
 
 ref.list <- list(
@@ -357,10 +358,15 @@ result <- ga_daisy(
     modelOutputFolder = modelOutputFolder,
     lower = lower,
     upper = upper,
-    popSize = 100, # 40
+    
+  #  selection = selCroMut[1],
+  #  crossover = selCroMut[2],
+  #  mutation = selCroMut[3],
+    
+    popSize = 100, # 100
     elitism = 4, # 4,
-    maxiter = 25, # 20
-    run = 25, # 20
+    maxiter = 25, # 25
+    run = 25, # 25
     maxFitness = 1,
     parallel = parallel,
     jobTime = metajobTime,

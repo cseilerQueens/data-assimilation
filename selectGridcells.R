@@ -6,9 +6,9 @@ library(raster)
 rm(list=ls())
 
 # Number of grid cells to sample:
-nGridcells <- 80 # 60
-minFracArea <- 1
-my.seed <- 7 # 1 for 40 GCs during tests
+nGridcells <- 160 # 80 # 60
+minFracArea <- 0.99
+my.seed <- 7 # 1 for 40 GCs during tests, 7 usually
 
 
 # Get WWF Biomes
@@ -95,6 +95,12 @@ for (i in 1:12) {
   select <- sample(x = 1:nrow(xy),
                    size = nbiome,
                    replace = FALSE)
+  
+  # shuffle data
+  set.seed(1)
+  xy <- xy[sample(nrow(xy), replace = FALSE), ]
+  
+  # Select points
   xy <- xy[select, ]
   xy <- matrix(xy, ncol = 2)
   
